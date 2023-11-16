@@ -16,6 +16,6 @@ Here's the abstract:
 
 The Java source code contains both classes and JUnit test files (files of the form *Test.java).
 The file "read_junit_file" is a Linux script file that compiles the java files and runs a 
-specified JUnit test. Instructions on how to use it is in the script file itself.
+specified JUnit test. Instructions on how to use it are in the script file itself.
 
 All files are copyrighted by Stewart Trickett and licensed under the MIT license.
