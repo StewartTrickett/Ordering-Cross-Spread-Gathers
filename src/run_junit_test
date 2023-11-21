@@ -1,0 +1,64 @@
+################################################################################
+#  Run a junit test from the command line.
+#
+#  The following:
+#
+#     run_junit_test OrderLocnsTest
+#
+#  should produce the output:
+#
+#     .OrderLocnsTest: compare
+#
+#        OrderProjectOntoLine          999
+#        OrderFullSHP                  809
+#        OrderBranchEliminate          821
+#        OrderSegmentSHP               817
+#
+#  Note that it's just the class name "OrderUnitTest", not the entire file name. 
+#
+#  This assumes that all the .jar files needed to drive a junit test have
+#  been copied over to this directory. This is typically:
+#
+#     junit.jar
+#     hamcrest-core.jar
+#
+#  These files can be downloaded from
+#
+#     https://github.com/junit-team/junit4/wiki/Download-and-Install
+#
+#  Copyright (c) 2023 Stewart Trickett
+#  Licensed under the MIT License (see LICENSE.md file)
+################################################################################
+
+#  Check the number of arguments
+
+if (($# != 1)) 
+then
+   echo "Error: Number of arguments must be 1 (the junit class name)"
+   exit -1
+fi
+
+#  Clean up files and directories
+
+rm -r CrossSpreadOrder 2> /dev/null
+rm CrossSpreadOrder.jar 2> /dev/null
+
+#  Compile the java files.
+#  The files end up in subdirectory CrossSpreadOrder.
+
+javac *.java -cp "junit.jar" -d .
+
+#  Put the .class files in the subdirectory into a .jar file
+
+jar cvf CrossSpreadOrder.jar CrossSpreadOrder/*.class > /dev/null
+rm -r CrossSpreadOrder
+
+#  Specify the jar files to be executed. These jar file must be in
+#  the current directory.
+
+export JARFILES=".:CrossSpreadOrder.jar:junit.jar:hamcrest-core.jar"
+
+#  Run the junit test
+
+java -cp ${JARFILES} org.junit.runner.JUnitCore CrossSpreadOrder.$1
+
