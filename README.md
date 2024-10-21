@@ -2,7 +2,7 @@
 
 This repository contains Java source code described in the paper
 
-    Trickett, S., 2024, Ordering Cross-Spread Gathers, Geophysics, 89 (to appear).
+    Trickett, S., 2024, Ordering Cross-Spread Gathers, Geophysics, 89 (2).
 
 Here's the abstract:
 
